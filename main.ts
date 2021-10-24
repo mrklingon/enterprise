@@ -30,15 +30,18 @@ input.onButtonPressed(Button.A, function () {
         Ship.ifOnEdgeBounce()
     }
 })
-function mkPlanet () {
-    Planet = game.createSprite(randint(0, 4), randint(0, 4))
-}
-input.onButtonPressed(Button.AB, function () {
+function warp () {
     Ship.set(LedSpriteProperty.X, randint(0, 4))
     Ship.set(LedSpriteProperty.Y, randint(0, 4))
     Planet.delete()
     Splash()
     mkPlanet()
+}
+function mkPlanet () {
+    Planet = game.createSprite(randint(0, 4), randint(0, 4))
+}
+input.onButtonPressed(Button.AB, function () {
+    warp()
 })
 input.onButtonPressed(Button.B, function () {
     Dir += 1
@@ -58,3 +61,10 @@ Ship = game.createSprite(2, 2)
 Dir = 0
 Ship.set(LedSpriteProperty.Direction, 45 * Dir)
 mkPlanet()
+basic.forever(function () {
+    if (Ship.isTouching(Planet)) {
+        basic.showString("Planet explored!")
+        warp()
+    }
+    basic.pause(100)
+})
