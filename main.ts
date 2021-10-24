@@ -24,10 +24,24 @@ function Splash () {
         `)
 }
 input.onButtonPressed(Button.A, function () {
+    Moves += -1
+    if (Moves < 1) {
+        game.gameOver()
+    }
     for (let index = 0; index <= 4; index++) {
         Ship.move(1)
         basic.pause(100)
         Ship.ifOnEdgeBounce()
+        if (Ship.isTouching(Planet)) {
+            for (let index2 = 0; index2 < 2; index2++) {
+                game.addScore(5)
+                basic.showIcon(IconNames.SmallDiamond)
+                basic.pause(100)
+                basic.showIcon(IconNames.Diamond)
+                basic.pause(100)
+            }
+            warp()
+        }
     }
 })
 function warp () {
@@ -41,6 +55,7 @@ function mkPlanet () {
     Planet = game.createSprite(randint(0, 4), randint(0, 4))
 }
 input.onButtonPressed(Button.AB, function () {
+    Moves += -5
     warp()
 })
 input.onButtonPressed(Button.B, function () {
@@ -54,6 +69,7 @@ input.onButtonPressed(Button.B, function () {
 let Planet: game.LedSprite = null
 let Ent2: Image = null
 let Ent: Image = null
+let Moves = 0
 let Dir = 0
 let Ship: game.LedSprite = null
 Splash()
@@ -61,10 +77,4 @@ Ship = game.createSprite(2, 2)
 Dir = 0
 Ship.set(LedSpriteProperty.Direction, 45 * Dir)
 mkPlanet()
-basic.forever(function () {
-    if (Ship.isTouching(Planet)) {
-        basic.showString("Planet explored!")
-        warp()
-    }
-    basic.pause(100)
-})
+Moves = 100
