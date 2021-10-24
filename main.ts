@@ -30,10 +30,15 @@ input.onButtonPressed(Button.A, function () {
         Ship.ifOnEdgeBounce()
     }
 })
+function mkPlanet () {
+    Planet = game.createSprite(randint(0, 4), randint(0, 4))
+}
 input.onButtonPressed(Button.AB, function () {
-    Splash()
     Ship.set(LedSpriteProperty.X, randint(0, 4))
     Ship.set(LedSpriteProperty.Y, randint(0, 4))
+    Planet.delete()
+    Splash()
+    mkPlanet()
 })
 input.onButtonPressed(Button.B, function () {
     Dir += 1
@@ -43,6 +48,7 @@ input.onButtonPressed(Button.B, function () {
     basic.showNumber(Dir)
     Ship.set(LedSpriteProperty.Direction, 45 * Dir)
 })
+let Planet: game.LedSprite = null
 let Ent2: Image = null
 let Ent: Image = null
 let Dir = 0
@@ -51,3 +57,4 @@ Splash()
 Ship = game.createSprite(2, 2)
 Dir = 0
 Ship.set(LedSpriteProperty.Direction, 45 * Dir)
+mkPlanet()
