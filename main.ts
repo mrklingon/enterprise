@@ -101,5 +101,6 @@ basic.forever(function () {
             Asteroid.move(1)
             Asteroid.ifOnEdgeBounce()
         }
+        Asteroid.turn(Direction.Right, randint(17, 107))
     }
 })
