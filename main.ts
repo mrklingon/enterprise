@@ -46,8 +46,8 @@ input.onButtonPressed(Button.A, function () {
                 Asteroid = game.createSprite(randint(0, 4), randint(0, 4))
                 Asteroid.set(LedSpriteProperty.Direction, randint(0, 360))
             }
+            game.addScore(5)
             for (let index2 = 0; index2 < 2; index2++) {
-                game.addScore(5)
                 basic.showIcon(IconNames.SmallDiamond)
                 basic.pause(100)
                 basic.showIcon(IconNames.Diamond)
